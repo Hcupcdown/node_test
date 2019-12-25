@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: localhost    Database: questionnaire_survey_system
 -- ------------------------------------------------------
--- Server version	8.0.15
+-- Server version	8.0.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `qoption`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `qoption` (
   `OID` int(11) NOT NULL AUTO_INCREMENT,
-  `contexts` varchar(45) DEFAULT NULL,
+  `qcontexts` varchar(45) DEFAULT NULL,
   `op_num` int(11) NOT NULL DEFAULT '0',
   `QuID` int(11) DEFAULT NULL,
   `remark` varchar(4) DEFAULT NULL,
@@ -110,7 +110,6 @@ CREATE TABLE `questionnaire` (
   `Qname` varchar(45) DEFAULT NULL,
   `Qnum` int(11) DEFAULT NULL,
   `deadline` date DEFAULT NULL,
-  `finish_time` datetime(1) DEFAULT NULL,
   `release_time` datetime(1) DEFAULT NULL,
   `release_way` varchar(10) DEFAULT NULL,
   `AID` varchar(10) DEFAULT NULL,
@@ -127,7 +126,7 @@ CREATE TABLE `questionnaire` (
 
 LOCK TABLES `questionnaire` WRITE;
 /*!40000 ALTER TABLE `questionnaire` DISABLE KEYS */;
-INSERT INTO `questionnaire` VALUES (1,'大学生自行车的使用情况调查',5,'2019-02-03','2019-02-04 00:00:00.0','2019-01-01 00:00:00.0','定时','A1',1),(2,'大学生自行车的购买情况调查',5,'2019-01-01','2019-01-01 00:00:00.0','2019-01-01 00:00:00.0','非定时','A1',0),(3,'大学生自行车的搬迁情况调查',5,'2019-02-02','2019-02-02 00:00:00.0','2019-02-01 00:00:00.0','定时','A1',0),(4,'大学生电脑需求情况调查',10,'2019-02-03','2019-02-04 00:00:00.0','2019-01-01 00:00:00.0','定时','A1',1);
+INSERT INTO `questionnaire` VALUES (1,'大学生自行车的使用情况调查',5,'2019-02-03','2019-01-01 00:00:00.0','定时','A1',1),(2,'大学生自行车的购买情况调查',5,'2019-01-01','2019-01-01 00:00:00.0','非定时','A1',0),(3,'大学生自行车的搬迁情况调查',5,'2019-02-02','2019-02-01 00:00:00.0','定时','A1',0),(4,'大学生电脑需求情况调查',10,'2019-02-03','2019-01-01 00:00:00.0','定时','A1',1);
 /*!40000 ALTER TABLE `questionnaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +144,7 @@ CREATE TABLE `user` (
   `QID` int(11) NOT NULL,
   PRIMARY KEY (`UserID`),
   KEY `QID1_idx` (`QID`),
-  CONSTRAINT `QID1` FOREIGN KEY (`QID`) REFERENCES `questionnaire` (`QID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `QID1` FOREIGN KEY (`QID`) REFERENCES `questionnaire` (`QID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -168,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-25  8:35:35
+-- Dump completed on 2019-12-25 19:41:56
